@@ -1,0 +1,105 @@
+# Roomkub-api/docker-compose.yml
+# docker-compose up --build
+
+version: "3.8"
+x-environment: &default-environment
+  SERVICE_PORT: ${SERVICE_PORT}
+  SWAGGER_HOST: ${SWAGGER_HOST}
+  HOST_URL: ${HOST_URL}
+  SECRET_KEY: ${SECRET_KEY}
+  MONGO_CONNECTION_STRING: ${MONGO_CONNECTION_STRING}
+  MONGO_DATABASE_NAME: ${MONGO_DATABASE_NAME}
+  CIPHER_IV: ${CIPHER_IV}
+  CIPHER_KEY_VERSION: ${CIPHER_KEY_VERSION}
+  HASH_KEY: ${HASH_KEY}
+  DEK: ${DEK}
+  WDEKS: ${WDEKS}
+  JWT_KEY: ${JWT_KEY}
+  AWS_S3_REGION: ${AWS_S3_REGION}
+  AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+  AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+  AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+  CF_BUCKET: ${CF_BUCKET}
+  CF_ID: ${CF_ID}
+  CF_ACCESS_KEY: ${CF_ACCESS_KEY}
+  CF_SECRET_KEY: ${CF_SECRET_KEY}
+  RABBIT_MQ_URI: ${RABBIT_MQ_URI}
+  LINE_NOTIFY_TOKEN: ${LINE_NOTIFY_TOKEN}
+  ROOT_ROLE_SLUG: ${ROOT_ROLE_SLUG}
+  GIN_MODE: ${GIN_MODE}
+
+services:
+  roomkub-user-and-customer-api-service-image:
+    image: roomkub/roomkub-user-and-customer-api-service-image
+    build:
+      context: .
+      dockerfile: cmd/roomkub-user-and-customer-api/Dockerfile
+      args:
+        SERVICE_PORT: ${SERVICE_PORT}
+        SWAGGER_HOST: ${SWAGGER_HOST}
+        HOST_URL: ${HOST_URL}
+        SECRET_KEY: ${SECRET_KEY}
+        MONGO_CONNECTION_STRING: ${MONGO_CONNECTION_STRING}
+        MONGO_DATABASE_NAME: ${MONGO_DATABASE_NAME}
+        CIPHER_IV: ${CIPHER_IV}
+        CIPHER_KEY_VERSION: ${CIPHER_KEY_VERSION}
+        HASH_KEY: ${HASH_KEY}
+        DEK: ${DEK}
+        WDEKS: ${WDEKS}
+        JWT_KEY: ${JWT_KEY}
+        AWS_S3_REGION: ${AWS_S3_REGION}
+        AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+        AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+        AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+        CF_BUCKET: ${CF_BUCKET}
+        CF_ID: ${CF_ID}
+        CF_ACCESS_KEY: ${CF_ACCESS_KEY}
+        CF_SECRET_KEY: ${CF_SECRET_KEY}
+        RABBIT_MQ_URI: ${RABBIT_MQ_URI}
+        LINE_NOTIFY_TOKEN: ${LINE_NOTIFY_TOKEN}
+        ROOT_ROLE_SLUG: ${ROOT_ROLE_SLUG}
+        GIN_MODE: ${GIN_MODE}
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    environment:
+      <<: *default-environment
+
+  business-channel-api-service-image:
+    image: roomkub/business-channel-api-service-image
+    build:
+      context: .
+      dockerfile: cmd/roomkub-business-channel-api/Dockerfile
+      args:
+        SERVICE_PORT: ${SERVICE_PORT}
+        SWAGGER_HOST: ${SWAGGER_HOST}
+        HOST_URL: ${HOST_URL}
+        SECRET_KEY: ${SECRET_KEY}
+        MONGO_CONNECTION_STRING: ${MONGO_CONNECTION_STRING}
+        MONGO_DATABASE_NAME: ${MONGO_DATABASE_NAME}
+        CIPHER_IV: ${CIPHER_IV}
+        CIPHER_KEY_VERSION: ${CIPHER_KEY_VERSION}
+        HASH_KEY: ${HASH_KEY}
+        DEK: ${DEK}
+        WDEKS: ${WDEKS}
+        JWT_KEY: ${JWT_KEY}
+        AWS_S3_REGION: ${AWS_S3_REGION}
+        AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+        AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+        AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+        CF_BUCKET: ${CF_BUCKET}
+        CF_ID: ${CF_ID}
+        CF_ACCESS_KEY: ${CF_ACCESS_KEY}
+        CF_SECRET_KEY: ${CF_SECRET_KEY}
+        RABBIT_MQ_URI: ${RABBIT_MQ_URI}
+        LINE_NOTIFY_TOKEN: ${LINE_NOTIFY_TOKEN}
+        ROOT_ROLE_SLUG: ${ROOT_ROLE_SLUG}
+        GIN_MODE: ${GIN_MODE}
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    environment:
+      <<: *default-environment
+

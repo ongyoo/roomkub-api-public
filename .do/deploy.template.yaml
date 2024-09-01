@@ -1,0 +1,14 @@
+spec:
+  alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+  functions:
+  - github:
+      branch: develop
+      deploy_on_push: true
+      repo: https://github.com/ongyoo/roomkub-api
+    name: roomkub-api
+    routes:
+    - path: /
+    source_dir: /
+  name: roomkub-api

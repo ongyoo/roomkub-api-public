@@ -1,0 +1,12 @@
+parameters: {}
+environment: {}
+packages:
+  - name: cmd
+    environment: {}
+    parameters: {}
+    actions:
+      - name: main
+        main: ''
+        runtime: 'go:default'
+        environment: {}
+        parameters: {}
