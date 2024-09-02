@@ -88,7 +88,7 @@ func sendLineNotify(message, imageUrl string) error {
 			"imageFullsize":  imageUrl,
 		}).
 		SetHeader("Content-Type", "application/x-www-form-urlencoded").
-		SetHeader("Authorization", "Bearer wpgKwlzAdVqxRIauifA49uC7pqtsitXOBKm1YUCNdIi").
+		SetHeader("").
 		Post(urlEndPoint)
 	fmt.Println(err, resp)
 	if err != nil {
